@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+const res = await fetch('https://sheetdb.io/api/v1/07bgyx9fvjsuq');
+const data = await res.json()
+const filteredData = data.filter(item => item['Jenis Data'] === 'Database');
+---
+
+<Layout>
+    
+    <main class="bg-[url(./bg.png)] h-[80vh] md:bg-[21em] bg-cover bg-right-top bg-right bg-no-repeat sm:bg-[15em]">
+		<div class="container m-auto px-5 flex items-center justify-between pt-10">
+			<div class="flex flex-col space-y-5 sm:space-y-3">
+				<h1 class="md:text-8xl font-bold w-3 sm:text-5xl">DATABASE</h1>
+				<h3 class="md:text-2xl font-semibold italic text-[#ff8400] sm:text-sm">Temukan Database yang anda butuhkan</h3>
+				<a href="/" class="md:w-[10em] p-3 text-center bg-[#4f200d] text-white rounded-md sm:w-[7em] sm:p-2">Get Started</a>
+			</div>
+			
+			<div>
+				<img src="/icon3.png" alt="icon" class="md:w-[25em] sm:w-[15em]">
+			</div>
+		</div>
+	</main>
+    
+    
+	<div class="container px-5 m-auto mt-10 space-y-5 flex flex-col justify-center items-center">
+		<div class="flex justify-center">
+			<h1 class="text-2xl font-bold text-[#ff8400]">Survei</h1>
+		</div>
+
+		<div class=" grid md:grid-cols-2 place-items-stretch sm:grid-cols-1 gap-5 p-3">
+			{filteredData.map(item =>
+				<div class="w-[20em] h-[30em] p-5 bg-white flex flex-col items-center border-orange-500 border-2 rounded-md space-y-4 shadow-md">
+					<img src={item.Img} alt="example" class="w-[13em] border-orange-500 border-2 rounded-md">
+					<h3 class="font-bold text-xl text-start">{item.Nama}</h3>
+					<button href={item.link} class="p-2 w-full rounded-md bg-orange-500 font-bold">Read</button>
+				</div>
+				
+			)}						
+		</div>			
+	</div>
+
+</Layout>

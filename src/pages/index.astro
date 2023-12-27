@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+const res = await fetch('https://sheetdb.io/api/v1/07bgyx9fvjsuq?limit=4');
+const data = await res.json()
+const survei = data.filter(item => item['Jenis Data'] === 'Survei');
+const database = data.filter(item => item['Jenis Data'] === 'Database');
+---
+
+<Layout title="Welcome to Astro.">
+	<main class="bg-[url(./bg.png)] h-[80vh] md:bg-[21em] bg-cover bg-right-top bg-right bg-no-repeat sm:bg-[15em]">
+		<div class="container m-auto px-5 flex items-center justify-between pt-10">
+			<div class="flex flex-col space-y-5 sm:space-y-3">
+				<h1 class="md:text-8xl font-bold w-3 sm:text-5xl">SELAMAT DATANG</h1>
+				<h3 class="md:text-2xl font-semibold italic text-[#ff8400] sm:text-sm">Menuju FKIP On Basedata Drive</h3>
+				<a href="/" class="md:w-[10em] p-3 text-center bg-[#4f200d] text-white rounded-md sm:w-[7em] sm:p-2">Get Started</a>
+			</div>
+			
+			<div>
+				<img src="/icon.png" alt="icon" class="md:w-[25em] sm:w-[15em]">
+			</div>
+		</div>
+	</main>
+
+	<div class="container m-auto mt-10 px-5 flex flex-wrap md:flex-row md:justify-between">
+		<div class="flex flex-col space-y-3">
+			<h1 class="text-3xl font-bold text-[#ff8400]">DataKite FKIP UNTAN</h1>
+			<h2 class="text-lg font-bold">Portal Data untuk KBM</h2>
+			<p class="font-semibold text-md text-slate-600 md:max-w-sm sm:max-w-xl text-justify">DataKite FKIP UNTAN merupakan platform digital yang dibentuk oleh Departemen Riset dan Data BEM FKIP UNTAN yang berfungsi sebagai wadah publikasi dari data yang hendak maupun telah diproses melalui survei serta analisis pengolahan untuk mewujudkan BEM FKIP UNTAN yang berbasis penelitian.
+			“DataKite FKIP UNTAN” adalah nama dari sebuah cita-cita dan harapan untuk mewujudkan <span class="font-bold">#FKIPBaseonDataDrive.</span></p>
+		</div>
+
+		<div>
+			<img src="/logo2.png" alt="" class="md:w-[20em] mr-[12em] sm:w-[15em]">
+		</div>
+	</div>
+
+	<!-- flex flex-wrap justify-center items-start md:space-x-5 md:space-y-0 sm:space-y-10 -->
+
+	<div class="container m-auto mt-10 px-5 grid md:grid-cols-2 md:space-y-0 sm:grid-cols-1 sm:space-y-5 justify-center justify-items-center">
+		<div class="px-8 py-5 w-[20em] bg-slate-800 rounded-lg flex flex-col gap-3 justify-center items-center drop-shadow-lg">
+			<h1 class="text-white text-xl font-bold text-center">VISI</h1>
+			<p class="text-md font-semibold text-justify text-white">Mendukung BEM FKIP UNTAN dalam meningkatkan kinerja dengan melakukan riset dan analisis data terhadap permasalahan mahasiswa FKIP UNTAN. Memberikan landasan untuk kebijakan yang didasarkan pada data, berfokus pada kebutuhan, dan memberikan solusi yang tepat.</p>
+		</div>
+
+		<div class="px-8 py-5 w-[20em] bg-slate-800 rounded-lg flex flex-col gap-3 justify-center items-center drop-shadow-lg">
+			<h1 class="text-white text-xl font-bold text-center">MISI</h1>
+			<ol class="text-white font-semibold text-justify list-decimal">
+				<li>Menyediakan database terbuka dan mudah diakses untuk KBM FKIP UNTAN</li>
+				<li>Melakukan survei untuk mendapatkan masukan dari KBM FKIP UNTAN</li>
+				<li>Melakukan penelitian tentang berbagai isu di FKIP UNTAN</li>
+				<li>Menggunakan data untuk memberikan pemahaman yang lebih baik kepada KBM FKIP UNTAN</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="container px-5 m-auto mt-10 space-y-5 flex flex-col justify-center items-center">
+		<div class="flex justify-center">
+			<h1 class="text-2xl font-bold text-[#ff8400]">Survei</h1>
+		</div>
+
+		<div class=" grid md:grid-cols-2 place-items-stretch sm:grid-cols-1 gap-5 p-3">
+			{survei.map(item =>
+				<div class="w-[20em] h-[30em] p-5 bg-white flex flex-col items-center border-orange-500 border-2 rounded-md space-y-4 shadow-md">
+					<img src={item.Img} alt="example" class="w-[13em] border-orange-500 border-2 rounded-md">
+					<h3 class="font-bold text-xl text-start">{item.Nama}</h3>
+					<button href={item.link} class="p-2 w-full rounded-md bg-orange-500 font-bold">Read</button>
+				</div>
+				
+			)}						
+		</div>			
+	</div>
+
+	<div class="container px-5 m-auto mt-10 space-y-5 flex flex-col justify-center items-center">
+		<div class="flex justify-center">
+			<h1 class="text-2xl font-bold text-[#ff8400]">Database</h1>
+		</div>
+
+		<div class=" grid md:grid-cols-2 place-items-stretch sm:grid-cols-1 gap-5 p-3">
+			{database.map(item =>
+				<div class="w-[20em] h-[30em] p-5 bg-white flex flex-col items-center border-orange-500 border-2 rounded-md space-y-4 shadow-md">
+					<img src={item.Img} alt="example" class="w-[13em] border-orange-500 border-2 rounded-md">
+					<h3 class="font-bold text-xl text-start">{item.Nama}</h3>
+					<button href={item.link} class="p-2 w-full rounded-md bg-orange-500 font-bold">Read</button>
+				</div>
+				
+			)}						
+		</div>			
+	</div>
+</Layout>
+
+
